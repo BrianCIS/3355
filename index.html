@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+<style>
+#map { height: 400px; }
+</style>
+</head>
+<body>
+    <div><b>Brian Rivera CIS3355</b></div>
+     <div id="map"></div>
+     <script>
+        var mymap = L.map('map').setView([29.313, -94.82], 13);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1IjoiYnJpYW5kb250Y2FyZSIsImEiOiJjbDFvaG9rcWkwNnYxM2tvOWRhZmZoNmNrIn0.xGTWQhszDIO1OCV-ocTKmA'
+        }).addTo(mymap);
+        var marker = L.marker([29.313, -94.82]).addTo(mymap);
+
+        var circle = L.circle([29.313, -94.82], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 500
+        }).bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup().addTo(mymap);
+
+        var polygon = L.polygon([
+            [29.313, -94.82],
+            [29.313, -94.82],
+            [29.313, -94.82]
+        ]).addTo(mymap);
+        polygon.bindPopup("I am a polygon.");
+
+        var popup = L.popup()
+        .setLatLng([29.313, -94.82])
+        .setContent("This is Brian Favorite fishing place")
+        .openOn(mymap);
+        var greenIcon = L.icon({
+        iconUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/6/6c/Donkey_%28Shrek%29.png/130px-Donkey_%28Shrek%29.png',
+
+        iconSize:     [38, 95], // size of the icon
+        shadowSize:   [50, 64], // size of the shadow
+        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+        shadowAnchor: [4, 62],  // the same for the shadow
+        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+        L.marker([29.313, -94.82], {icon: greenIcon}).addTo(mymap);
+     </script>
+</body>
+</html>
